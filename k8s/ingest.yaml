@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: es-ingest
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: ingest
+  template:
+    metadata:
+      labels:
+        role: ingest
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:8.11.3
+        env:
+        - name: node.roles
+          value: "ingest"
+        ports:
+        - containerPort: 9200
