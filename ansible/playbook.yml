@@ -1,0 +1,16 @@
+- name: Setup Elasticsearch
+  hosts: all
+  become: true
+  tasks:
+    - name: Install Docker
+      apt: name=docker.io state=present
+
+    - name: Run Elasticsearch
+      docker_container:
+        name: "es-{{ inventory_hostname }}"
+        image: elasticsearch:8.11.3
+        env:
+          node.roles: "{{ node_role }}"
+        state: started
+        ports:
+          - "9200:9200"
