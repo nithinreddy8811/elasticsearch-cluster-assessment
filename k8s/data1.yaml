@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: es-data1  
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: data
+  template:
+    metadata:
+      labels:
+        role: data
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:8.11.3
+        env:
+        - name: node.roles
+          value: "data"
+        ports:
+        - containerPort: 9200
