@@ -1,0 +1,28 @@
+version: '3'
+services:
+  master:
+    image: elasticsearch:8.11.3
+    environment:
+      - node.roles=master
+    ports:
+      - "9200:9200"
+
+  data1:
+    image: elasticsearch:8.11.3
+    environment:
+      - node.roles=data
+
+  data2:
+    image: elasticsearch:8.11.3
+    environment:
+      - node.roles=data
+
+  ingest:
+    image: elasticsearch:8.11.3
+    environment:
+      - node.roles=ingest
+
+  coordinator:
+    image: elasticsearch:8.11.3
+    environment:
+      - node.roles=[]
