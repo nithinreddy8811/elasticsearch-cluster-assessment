@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: es-coordinator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: coordinator
+  template:
+    metadata:
+      labels:
+        role: coordinator
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:8.11.3
+        env:
+        - name: node.roles
+          value: ""     
+        ports:
+        - containerPort: 9200
