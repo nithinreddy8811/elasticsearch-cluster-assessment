@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: es-master
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      role: master
+  template:
+    metadata:
+      labels:
+        role: master
+    spec:
+      containers:
+      - name: elasticsearch
+        image: elasticsearch:8.11.3
+        env:
+        - name: node.roles
+          value: "master"
+        ports:
+        - containerPort: 9200
